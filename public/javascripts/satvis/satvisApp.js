@@ -1,5 +1,5 @@
 "use strict";
 
-const satName = ["IS"];
+const satName = ["IST"];
 
 console.log(satName);
