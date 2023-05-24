@@ -11,7 +11,11 @@ var satelliteRouter = require("./routes/satellite");
 var datavisRouter = require("./routes/datavis");
 
 const liveReloadServer = livereload.createServer();
-liveReloadServer.watch(path.join(__dirname, "public"));
+liveReloadServer.server.once("connection", () => {
+  setTimeout(() => {
+    liveReloadServer.refresh("/");
+  }, 100);
+});
 
 const app = express();
 
@@ -33,12 +37,6 @@ app.use("/datavis", datavisRouter);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
-});
-
-liveReloadServer.server.once("connection", () => {
-  setTimeout(() => {
-    liveReloadServer.refresh("/");
-  }, 100);
 });
 
 // error handler
