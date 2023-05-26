@@ -10,9 +10,6 @@ const viewer = new Cesium.Viewer("cesiumContainer", {
   terrainProvider: Cesium.createWorldTerrain({
     requestWaterMask: true,
   }),
-  imageryProvider: Cesium.createWorldImagery({
-    style: Cesium.IonWorldImageryStyle.AERIAL_WITH_LABELS,
-  }),
 });
 
 viewer.dataSources.add(czmlDataSource);
