@@ -4,14 +4,23 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "devstart": "DEBUG=portfolio:* nodemon ./bin/www"
+    "devstart": "DEBUG=portfolio:* nodemon ./bin/www --ignore public --ext *",
+    "watch": "nodemon"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
-    "express": "~4.16.1",
+    "express": "^4.18.2",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "pug": "2.0.0-beta11"
+    "node-dev": "^8.0.0",
+    "pug": "^3.0.2",
+    "satellite.js": "^5.0.0"
+  },
+  "devDependencies": {
+    "@flydotio/dockerfile": "^0.2.7",
+    "connect-livereload": "^0.6.1",
+    "livereload": "^0.9.3",
+    "nodemon": "^2.0.22"
   }
 }
