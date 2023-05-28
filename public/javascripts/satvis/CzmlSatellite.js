@@ -30,12 +30,6 @@ class CzmlSatellite {
         show: true,
         verticalOrigin: "CENTER",
       },
-      model: {
-        gltf: "images/pfm_full_scaled_cesium.gltf",
-        scale: 1,
-        runAnimations: false,
-        show: true,
-      },
       position: {
         interpolationAlgorithm: "LAGRANGE",
         interpolationDegree: 5,
