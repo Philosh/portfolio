@@ -2,8 +2,6 @@ const satName = "ISS";
 const czmlObj = new Czml();
 const cesiumSat = new CzmlSatellite(satName, getCzmlEpoch(new Date()));
 
-console.log("czmlObj", czmlObj);
-
 const czmlDataSource = new Cesium.CzmlDataSource();
 
 // Initialize the Cesium Viewer in the HTML element with the `cesiumContainer` ID.
@@ -47,7 +45,7 @@ const addBasicFeatures = () => {
 
       loop: true,
       width: 1.5,
-      material: new Cesium.Color(1, 1, 1, 1),
+      material: new Cesium.Color(1, 0.85, 0.69, 0.38),
     },
   });
 
@@ -125,6 +123,3 @@ viewer.clockViewModel.shouldAnimate = true;
 cesiumSat.propagate(1, 2);
 czmlObj.addObject(cesiumSat);
 czmlDataSource.load(czmlObj.getCzmlDoc());
-
-console.log(cesiumSat);
-console.log(czmlObj);
