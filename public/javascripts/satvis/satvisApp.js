@@ -24,12 +24,12 @@ const addBasicFeatures = () => {
   //Add Background Image
   viewer.scene.skyBox = new Cesium.SkyBox({
     sources: {
-      positiveX: "images/GalaxyTex_PositiveX.png",
-      negativeX: "images/GalaxyTex_NegativeX.png",
-      positiveY: "images/GalaxyTex_PositiveY.png",
-      negativeY: "images/GalaxyTex_NegativeY.png",
-      positiveZ: "images/GalaxyTex_PositiveZ.png",
-      negativeZ: "images/GalaxyTex_NegativeZ.png",
+      positiveX: "images/GalaxyTex_PositiveX.jpg",
+      negativeX: "images/GalaxyTex_NegativeX.jpg",
+      positiveY: "images/GalaxyTex_PositiveY.jpg",
+      negativeY: "images/GalaxyTex_NegativeY.jpg",
+      positiveZ: "images/GalaxyTex_PositiveZ.jpg",
+      negativeZ: "images/GalaxyTex_NegativeZ.jpg",
     },
   });
   //Add Equator
