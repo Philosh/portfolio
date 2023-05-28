@@ -21,6 +21,17 @@ viewer.dataSources.add(czmlDataSource);
 
 // Adding basic Lines in a globe
 const addBasicFeatures = () => {
+  //Add Background Image
+  viewer.scene.skyBox = new Cesium.SkyBox({
+    sources: {
+      positiveX: "images/GalaxyTex_PositiveX.png",
+      negativeX: "images/GalaxyTex_NegativeX.png",
+      positiveY: "images/GalaxyTex_PositiveY.png",
+      negativeY: "images/GalaxyTex_NegativeY.png",
+      positiveZ: "images/GalaxyTex_PositiveZ.png",
+      negativeZ: "images/GalaxyTex_NegativeZ.png",
+    },
+  });
   //Add Equator
   viewer.entities.add({
     name: "Equator",
