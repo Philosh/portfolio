@@ -15,12 +15,12 @@
     "morgan": "~1.9.1",
     "node-dev": "^8.0.0",
     "pug": "^3.0.2",
-    "satellite.js": "^5.0.0"
+    "satellite.js": "^5.0.0",
+    "connect-livereload": "^0.6.1",
+    "livereload": "^0.9.3"
   },
   "devDependencies": {
     "@flydotio/dockerfile": "^0.2.7",
-    "connect-livereload": "^0.6.1",
-    "livereload": "^0.9.3",
     "nodemon": "^2.0.22"
   }
 }

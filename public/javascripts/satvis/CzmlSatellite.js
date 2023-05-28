@@ -10,7 +10,7 @@ class CzmlSatellite {
         },
       },
       description:
-        "<p style='font-size:20px'>X1 Is the first satellite to be launched by ICEYE Oy which is scheduled to be launched during the month of January in India</p>",
+        "<p style='font-size:20px'>The International Space Station is the largest modular space station in low Earth orbit. The project involves five space agencies: the United States' NASA, Russia's Roscosmos, Japan's JAXA, Europe's ESA, and Canada's CSA.</p>",
       path: {
         width: 2,
         leadTime: 2640,
@@ -31,7 +31,7 @@ class CzmlSatellite {
         verticalOrigin: "CENTER",
       },
       model: {
-        gltf: "SampleData/pfm_full_scaled_cesium.gltf",
+        gltf: "images/pfm_full_scaled_cesium.gltf",
         scale: 1,
         runAnimations: false,
         show: true,
@@ -53,44 +53,51 @@ class CzmlSatellite {
   propagate(tle1, tle2) {
     // Sample TLE
     const tleLine1 =
-        "1 25544U 98067A   19156.50900463  .00003075  00000-0  59442-4 0  9992",
+        "1 25544U 98067A   23148.52219907  .00009878  00000-0  17938-3 0  9996",
       tleLine2 =
-        "2 25544  51.6433  59.2583 0008217  16.4489 347.6017 15.51174618173442";
+        "2 25544  51.6419  66.0181 0005349  31.3940 315.4651 15.50227688398730";
 
     // Initialize a satellite record
     const satrec = satellite.twoline2satrec(tleLine1, tleLine2);
+    const coords = [];
 
-    //  Propagate satellite using time since epoch (in minutes).
-    const positionAndVelocity1 = satellite.sgp4(satrec, 60);
+    for (let i = 0; i < 360; i++) {
+      //  Or you can use a JavaScript Date
+      const positionAndVelocity = satellite.propagate(
+        satrec,
+        new Date(new Date().getTime() + i * 60000)
+      );
 
-    //  Or you can use a JavaScript Date
-    const positionAndVelocity = satellite.propagate(satrec, new Date());
+      // The position_velocity result is a key-value pair of ECI coordinates.
+      // These are the base results from which all other coordinates are derived.
+      const positionEci = positionAndVelocity.position;
 
-    // The position_velocity result is a key-value pair of ECI coordinates.
-    // These are the base results from which all other coordinates are derived.
-    const positionEci = positionAndVelocity.position;
+      // You will need GMST for some of the coordinate transforms.
+      // http://en.wikipedia.org/wiki/Sidereal_time#Definition
+      const gmst = satellite.gstime(new Date());
 
-    // You will need GMST for some of the coordinate transforms.
-    // http://en.wikipedia.org/wiki/Sidereal_time#Definition
-    const gmst = satellite.gstime(new Date());
+      // You can get ECF, Geodetic, Look Angles, and Doppler Factor.
+      const positionEcf = satellite.eciToEcf(positionEci, gmst),
+        positionGd = satellite.eciToGeodetic(positionEci, gmst);
 
-    // You can get ECF, Geodetic, Look Angles, and Doppler Factor.
-    const positionEcf = satellite.eciToEcf(positionEci, gmst),
-      positionGd = satellite.eciToGeodetic(positionEci, gmst);
+      // The coordinates are all stored in key-value pairs.
+      // ECI and ECF are accessed by `x`, `y`, `z` properties.
+      const satelliteX = positionEcf.x,
+        satelliteY = positionEcf.y,
+        satelliteZ = positionEcf.z;
 
-    // The coordinates are all stored in key-value pairs.
-    // ECI and ECF are accessed by `x`, `y`, `z` properties.
-    const satelliteX = positionEcf.x,
-      satelliteY = positionEcf.y,
-      satelliteZ = positionEcf.z;
+      // Geodetic coords are accessed via `longitude`, `latitude`, `height`.
+      const longitude = positionGd.longitude,
+        latitude = positionGd.latitude,
+        height = positionGd.height;
 
-    // Geodetic coords are accessed via `longitude`, `latitude`, `height`.
-    const longitude = positionGd.longitude,
-      latitude = positionGd.latitude,
-      height = positionGd.height;
-
-    const coords = [0, satelliteX * 1000, satelliteY * 1000, satelliteZ * 1000];
-
-    console.log("satCoords", coords);
+      coords.push(
+        i * 60,
+        satelliteX * 1000,
+        satelliteY * 1000,
+        satelliteZ * 1000
+      );
+    }
+    this.obj["position"]["cartesian"] = coords;
   }
 }
