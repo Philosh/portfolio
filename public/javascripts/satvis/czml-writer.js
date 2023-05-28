@@ -9,8 +9,8 @@ class Czml {
         description: "A simple example",
         version: "1.0",
         clock: {
-          interval: "",
-          currentTime: "",
+          interval: getCzmlEpoch(new Date()) + "/2023-05-28T23:39:57Z",
+          currentTime: getCzmlEpoch(new Date()),
         },
       },
       {
@@ -137,6 +137,12 @@ class Czml {
       },
     ];
   }
+  addObject = (obj) => {
+    this.czmlObj.push(obj["obj"]);
+  };
+  getCzmlDoc = () => {
+    return this.czmlObj;
+  };
 }
 
 //Helper functions for czml-Document

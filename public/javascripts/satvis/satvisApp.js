@@ -1,5 +1,6 @@
-const satName = ["ISS"];
+const satName = "ISS";
 const czmlObj = new Czml();
+const cesiumSat = new CzmlSatellite(satName, getCzmlEpoch(new Date()));
 
 console.log("czmlObj", czmlObj);
 
@@ -120,7 +121,10 @@ const setClockMultiplier = (clock, multiplier) => {
 addBasicFeatures();
 setClockMultiplier(viewerClock, 1);
 viewer.clockViewModel.shouldAnimate = true;
-const cesiumSat = new CzmlSatellite(satName, getCzmlEpoch(new Date()));
+
 cesiumSat.propagate(1, 2);
+czmlObj.addObject(cesiumSat);
+czmlDataSource.load(czmlObj.getCzmlDoc());
 
 console.log(cesiumSat);
+console.log(czmlObj);

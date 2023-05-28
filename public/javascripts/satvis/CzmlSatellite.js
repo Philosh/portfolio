@@ -31,7 +31,7 @@ class CzmlSatellite {
         verticalOrigin: "CENTER",
       },
       model: {
-        gltf: "SampleData/pfm_full_scaled_cesium.gltf",
+        gltf: "images/pfm_full_scaled_cesium.gltf",
         scale: 1,
         runAnimations: false,
         show: true,
@@ -90,7 +90,7 @@ class CzmlSatellite {
       height = positionGd.height;
 
     const coords = [0, satelliteX * 1000, satelliteY * 1000, satelliteZ * 1000];
-
+    this.obj["position"]["cartesian"] = coords;
     console.log("satCoords", coords);
   }
 }
