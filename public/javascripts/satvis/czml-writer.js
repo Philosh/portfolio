@@ -9,7 +9,10 @@ class Czml {
         description: "A simple example",
         version: "1.0",
         clock: {
-          interval: getCzmlEpoch(new Date()) + "/2023-05-29T23:39:57Z",
+          interval:
+            getCzmlEpoch(new Date()) +
+            "/" +
+            getCzmlEpoch(new Date(new Date().getTime() + 720 * 60000)),
           currentTime: getCzmlEpoch(new Date()),
         },
       },

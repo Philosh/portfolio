@@ -47,9 +47,9 @@ class CzmlSatellite {
   propagate(tle1, tle2) {
     // Sample TLE
     const tleLine1 =
-        "1 25544U 98067A   23148.52219907  .00009878  00000-0  17938-3 0  9996",
+        "1 25544U 98067A   23149.25829992  .00013900  00000-0  24880-3 0  9993",
       tleLine2 =
-        "2 25544  51.6419  66.0181 0005349  31.3940 315.4651 15.50227688398730";
+        "2 25544  51.6433  62.3698 0005487  31.7591 105.9049 15.50253786398851";
 
     // Initialize a satellite record
     const satrec = satellite.twoline2satrec(tleLine1, tleLine2);
