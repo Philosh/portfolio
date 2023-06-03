@@ -218,8 +218,29 @@ const task3 = (nMax) => {
   return sum;
 };
 
+const task4 = (nMax) => {
+  const numList = [];
+  const nWays = new Array(nMax + 1).fill(0);
+
+  nWays[0] = 1;
+
+  for (let i = 1; i < nMax + 1; i++) {
+    numList.push(i);
+  }
+
+  for (let i = 0; i < numList.length - 1; i++) {
+    const currentNum = numList[i];
+    for (let j = 0; j < nWays.length - currentNum; j++) {
+      nWays[j + currentNum] += nWays[j];
+    }
+  }
+
+  return nWays[nWays.length - 1];
+};
+
 module.exports = {
   task1,
   task2,
   task3,
+  task4,
 };
