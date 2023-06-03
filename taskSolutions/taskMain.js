@@ -155,6 +155,32 @@ const task2 = (maxN) => {
 };
 
 const task3 = (nMax) => {
+  const isValidData = validateData([nMax]);
+  if (!isValidData) {
+    console.log("Data is not valid", nMax);
+    throw new Error(
+      "Data is not valid. Please enter natural numbers between 1 and 1000 inclusive."
+    );
+  }
+
+  const isWholeNum = validateIsWholeNum([nMax]);
+
+  if (!isWholeNum) {
+    console.log("Data is not a whole number", nMax);
+    throw new Error(
+      "Data is not a whole number. Please enter whole numbers between 1 and 1000 inclusive."
+    );
+  }
+
+  const isWithinRange = validateThreshold([nMax], 1, 1000);
+
+  if (!isWithinRange) {
+    console.log("Out of range", nMax);
+    throw new Error(
+      "Data is out of range. Please enter whole numbers between 1 and 1000 inclusive."
+    );
+  }
+
   let sum = 0;
 
   for (let i = 1; i <= nMax; i++) {
