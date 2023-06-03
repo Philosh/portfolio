@@ -1,15 +1,19 @@
-var createError = require("http-errors");
-var express = require("express");
-var path = require("path");
-var cookieParser = require("cookie-parser");
-var logger = require("morgan");
+// Initialized Basic Tools
+const createError = require("http-errors");
+const express = require("express");
+const path = require("path");
+const cookieParser = require("cookie-parser");
+const logger = require("morgan");
 const livereload = require("livereload");
 const connectLiveReload = require("connect-livereload");
 
-var indexRouter = require("./routes/index");
-var satelliteRouter = require("./routes/satellite");
-var datavisRouter = require("./routes/datavis");
+// Initialized Routers
+const indexRouter = require("./routes/index");
+const satelliteRouter = require("./routes/satellite");
+const datavisRouter = require("./routes/datavis");
+const taskRouter = require("./routes/interviewTasks");
 
+// ReloadServer script for reloading page
 const liveReloadServer = livereload.createServer();
 liveReloadServer.server.once("connection", () => {
   setTimeout(() => {
@@ -17,6 +21,7 @@ liveReloadServer.server.once("connection", () => {
   }, 100);
 });
 
+//Executing the app() application
 const app = express();
 
 app.use(connectLiveReload());
@@ -30,9 +35,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+//Setting routes
 app.use("/", indexRouter);
 app.use("/satellite", satelliteRouter);
 app.use("/datavis", datavisRouter);
+app.use("/tasks", taskRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
