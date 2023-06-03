@@ -1,5 +1,6 @@
 const BigNumber = require("bignumber.js");
 
+//Data Validation funcitions
 const validateData = (dataArr) => {
   return dataArr.every((data) => {
     return data;
@@ -24,6 +25,9 @@ const validateThreshold = (
   return sortedData[0] >= lowT && sortedData[sortedData.length - 1] <= highT;
 };
 
+///////
+
+// Utilities functions for tasks
 const strToWholeNum = (dataArr) => {
   return dataArr.map((data) => {
     return Math.floor(data);
@@ -47,6 +51,15 @@ const getPrimeNums = (max) => {
   return primes;
 };
 
+const padZeroFront = (totalLength, text) => {
+  if (text.length < totalLength) {
+  }
+  return n < 10 ? "0" + n : n;
+};
+
+//////
+
+// Tasks Functions
 const task1 = (a, b) => {
   const isValidData = validateData([a, b]);
   if (!isValidData) {
@@ -147,29 +160,36 @@ const task3 = (nMax) => {
   for (let i = 1; i <= nMax; i++) {
     const sqrt = Math.sqrt(i);
     const numIsSquare = Math.ceil(sqrt) === Math.floor(sqrt);
+
+    //Handle in a different way if the number is q perfect square.
     if (numIsSquare) {
       continue;
     }
     BigNumber.config({ DECIMAL_PLACES: 110 });
     const bigN = new BigNumber(i);
     const preciseSqrt = bigN.sqrt();
-    const decimals = preciseSqrt.c
-      .slice(1)
-      .reduce((acc, value) => acc + value, "");
+    let decimals = preciseSqrt.c.slice(1).reduce((acc, value) => {
+      value = value + "";
+      if (value.length < 14) {
+        value = value.padStart(14, "0");
+      }
+      return acc + value;
+    }, "");
 
-    console.log("prevDec", decimals);
-
-    console.log(decimals.substring(0, 99));
+    //Adding the number before the decimal
+    const finalDecimals = preciseSqrt.c[0].toString() + decimals;
+    const nthDecimal = finalDecimals.substring(0, 100);
 
     let decimalSum = 0;
-    for (let i = 0; i < 98; i++) {
-      const decimalInt = Number(decimals.charAt(i));
+    for (let i = 0; i < 100; i++) {
+      const decimalInt = Number(nthDecimal.charAt(i));
       decimalSum += decimalInt;
     }
-    console.log("sqrt of ", i, " = ", preciseSqrt);
-    console.log("decimals", decimals);
-    return decimalSum;
+
+    sum += decimalSum;
   }
+
+  return sum;
 };
 
 module.exports = {
@@ -177,17 +197,3 @@ module.exports = {
   task2,
   task3,
 };
-/* GET users listing. */
-
-// router.get("/", function (req, res, next) {
-//   const answer1 = task1(2, "100");
-//   console.log("answer1", answer1);
-
-//   //const answer2 = task2(10000);
-//   //console.log("answer2", answer2);
-
-//   const answer3 = task3(2);
-//   console.log("answer3", answer3);
-// });
-
-// module.exports = router;
