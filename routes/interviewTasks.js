@@ -22,7 +22,7 @@ router.get("/1", function (req, res, next) {
   // const answer4 = TASKS.task4(100);
   // console.log(("answer4", answer4));
 
-  const answer5 = TASKS.task5(90);
+  const answer5 = TASKS.task5(99);
   console.log("answer5", answer5);
   res.render("tasksViews/tasksDev", { ans: answer5 });
 });

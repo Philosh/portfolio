@@ -263,8 +263,6 @@ const task5 = (percent, N) => {
         hasIncreased = true;
       } else if (prevDigit < currentDigit) {
         hasDecreased = true;
-      } else if (prevDigit === currentDigit) {
-        hasBounced = true;
       }
 
       // console.log("currentDigit", currentDigit);
@@ -272,7 +270,7 @@ const task5 = (percent, N) => {
       // console.log("hasDecreased", hasDecreased);
       // console.log("hasIncreased", hasIncreased);
 
-      if (hasIncreased && hasDecreased) {
+      if ((hasIncreased && hasDecreased) || hasBounced) {
         console.log("bouncy N", i);
         bouncyN += 1;
         hasBounced = true;
