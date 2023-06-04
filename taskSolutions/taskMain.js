@@ -1,72 +1,25 @@
+//Module to validate input data
+const dataV = require("./dataValidation.js");
+
 //Module to handle number with huge float point values
 const BigNumber = require("bignumber.js");
 
-//Data Validation functions
-const validateData = (dataArr) => {
-  return dataArr.every((data) => {
-    return data;
-  });
-};
-
-const validateIsWholeNum = (dataArr) => {
-  return dataArr.every((data) => {
-    return !/\D/.test(data);
-  });
-};
-
-// Check if within Threshold Inclusive
-const validateThreshold = (
-  dataArr,
-  lowT = -Number.MAX_VALUE,
-  highT = Number.MAX_VALUE
-) => {
-  const sortedData = dataArr.sort((a, b) => {
-    return a - b;
-  });
-  return sortedData[0] >= lowT && sortedData[sortedData.length - 1] <= highT;
-};
-
-///////
-
-// Utilities functions for tasks
-const strToWholeNum = (dataArr) => {
-  return dataArr.map((data) => {
-    return Math.floor(data);
-  });
-};
-
-const getPrimeNums = (max) => {
-  let sieve = [],
-    i,
-    j,
-    primes = [];
-  for (i = 2; i <= max; ++i) {
-    if (!sieve[i]) {
-      // i has not been marked -- it is prime
-      primes.push(i);
-      for (j = i << 1; j <= max; j += i) {
-        sieve[j] = true;
-      }
-    }
-  }
-  return primes;
-};
-
-//////
+//Module for simple utilities functions
+const uFuncs = require("./utilitiesFunctions.js");
 
 // Tasks Functions Starting here ///
 
 ///////////////////////////////////
 //////////////////////////////////
 const task1 = (a, b) => {
-  const isValidData = validateData([a, b]);
+  const isValidData = dataV.validateData([a, b]);
   if (!isValidData) {
     throw new Error(
       "Data is not valid. Please enter whole numbers between 2 and 100 inclusive."
     );
   }
 
-  const isWholeNum = validateIsWholeNum([a, b]);
+  const isWholeNum = dataV.validateIsWholeNum([a, b]);
 
   if (!isWholeNum) {
     throw new Error(
@@ -74,7 +27,7 @@ const task1 = (a, b) => {
     );
   }
 
-  const isWithinRange = validateThreshold([a, b], 2, 100);
+  const isWithinRange = dataV.validateThreshold([a, b], 2, 100);
 
   if (!isWithinRange) {
     throw new Error(
@@ -82,7 +35,7 @@ const task1 = (a, b) => {
     );
   }
 
-  const validData = strToWholeNum([a, b]).sort((a, b) => a - b);
+  const validData = uFuncs.strToWholeNum([a, b]).sort((a, b) => a - b);
   const combinations = [];
 
   for (let i = validData[0]; i <= validData[1]; i++) {
@@ -100,7 +53,7 @@ const task1 = (a, b) => {
 
 const task2 = (maxN) => {
   let answer = -1;
-  const isWithinRange = validateThreshold([maxN], 2, 100000);
+  const isWithinRange = dataV.validateThreshold([maxN], 2, 100000);
 
   if (!isWithinRange) {
     throw new Error(
@@ -108,7 +61,7 @@ const task2 = (maxN) => {
     );
   }
   const maxPrime = maxN;
-  const primeList = getPrimeNums(maxPrime);
+  const primeList = uFuncs.getPrimeNums(maxPrime);
 
   const iterateSum = (n) => {
     let found = false;
@@ -145,14 +98,14 @@ const task2 = (maxN) => {
 };
 
 const task3 = (nMax) => {
-  const isValidData = validateData([nMax]);
+  const isValidData = dataV.validateData([nMax]);
   if (!isValidData) {
     throw new Error(
       "Data is not valid. Please enter natural numbers between 1 and 1000 inclusive."
     );
   }
 
-  const isWholeNum = validateIsWholeNum([nMax]);
+  const isWholeNum = dataV.validateIsWholeNum([nMax]);
 
   if (!isWholeNum) {
     throw new Error(
@@ -160,7 +113,7 @@ const task3 = (nMax) => {
     );
   }
 
-  const isWithinRange = validateThreshold([nMax], 1, 1000);
+  const isWithinRange = dataV.validateThreshold([nMax], 1, 1000);
 
   if (!isWithinRange) {
     throw new Error(
@@ -294,13 +247,17 @@ const task6 = (firstP, secondP, lMax, rMax) => {
     );
   }
 
-  const isWithinRange1 = validateThreshold(
+  const isWithinRange1 = dataV.validateThreshold(
     [firstP.x, secondP.x, lMax, rMax],
     -5,
     5
   );
 
-  const isWithinRange2 = validateThreshold([firstP.y, secondP.y], -15, 15);
+  const isWithinRange2 = dataV.validateThreshold(
+    [firstP.y, secondP.y],
+    -15,
+    15
+  );
 
   if (!isWithinRange1 || !isWithinRange2) {
     throw new Error(
@@ -354,6 +311,4 @@ module.exports = {
   task5,
   task6,
   task7,
-  validateIsWholeNum,
-  validateThreshold,
 };
