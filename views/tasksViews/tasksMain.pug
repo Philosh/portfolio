@@ -22,12 +22,12 @@ main.main-wrapper
         .row.align-items-center
           .col-md-6
             .title.d-flex.align-items-center.flex-wrap.mb-30
-              h2.mr-40 Introduction
+              h2.mr-40 #{pageTitle}
         // end row
       // ========== title-wrapper end ==========
       // Invoice Wrapper Start
-
-      include introDesc.pug
+      if !taskId
+        include introDesc.pug
 
       // Invoice Wrapper End
     // end container

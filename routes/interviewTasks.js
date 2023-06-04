@@ -6,12 +6,17 @@ const TASKS = require("../taskSolutions/taskMain.js");
 /* GET users listing. */
 
 router.get("/", function (req, res, next) {
-  res.render("tasksViews/tasksMain");
+  res.render("tasksViews/tasksMain", { pageTitle: "Introduction" });
 });
 
 router.get("/:taskId", function (req, res, next) {
   console.log("params", req.params.taskId);
   const taskID = req.params.taskId;
+  const isWholeNum = TASKS.validateIsWholeNum([taskID]);
+  const isInRange = TASKS.validateThreshold([taskID], 1, 7);
+  if (!isWholeNum || !isInRange) {
+    res.redirect("/tasks");
+  }
   const taskIdFunc = {
     1: TASKS.task1,
     2: TASKS.task2,
@@ -38,7 +43,11 @@ router.get("/:taskId", function (req, res, next) {
   console.log("answer", answer);
   const answer1 = TASKS.task1(2, "100");
   console.log("answer5", answer1);
-  res.render("tasksViews/tasksMain", { ans: answer });
+  res.render("tasksViews/tasksMain", {
+    ans: answer,
+    taskId: taskID,
+    pageTitle: "Task " + taskID,
+  });
 });
 
 module.exports = router;
