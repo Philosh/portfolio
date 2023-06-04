@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const path = require("path");
 const TASKS = require("../taskSolutions/taskMain.js");
+const dataV = require("../taskSolutions/dataValidation.js");
 
 /* GET users listing. */
 
@@ -10,10 +11,9 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/:taskId", function (req, res, next) {
-  console.log("taskId", req.params.taskId);
   const taskID = req.params.taskId;
-  const isWholeNum = TASKS.validateIsWholeNum([taskID]);
-  const isInRange = TASKS.validateThreshold([taskID], 1, 7);
+  const isWholeNum = dataV.validateIsWholeNum([taskID]);
+  const isInRange = dataV.validateThreshold([taskID], 1, 7);
   if (!isWholeNum || !isInRange) {
     res.redirect("/tasks");
   }

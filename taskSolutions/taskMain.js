@@ -1,90 +1,41 @@
+//Module to validate input data
+const dataV = require("./dataValidation.js");
+
+//Module to handle number with huge float point values
 const BigNumber = require("bignumber.js");
 
-//Data Validation funcitions
-const validateData = (dataArr) => {
-  return dataArr.every((data) => {
-    return data;
-  });
-};
-
-const validateIsWholeNum = (dataArr) => {
-  return dataArr.every((data) => {
-    return !/\D/.test(data);
-  });
-};
-
-// Threshold Inclusive
-const validateThreshold = (
-  dataArr,
-  lowT = -Number.MAX_VALUE,
-  highT = Number.MAX_VALUE
-) => {
-  const sortedData = dataArr.sort((a, b) => {
-    return a - b;
-  });
-  return sortedData[0] >= lowT && sortedData[sortedData.length - 1] <= highT;
-};
-
-///////
-
-// Utilities functions for tasks
-const strToWholeNum = (dataArr) => {
-  return dataArr.map((data) => {
-    return Math.floor(data);
-  });
-};
-
-const getPrimeNums = (max) => {
-  let sieve = [],
-    i,
-    j,
-    primes = [];
-  for (i = 2; i <= max; ++i) {
-    if (!sieve[i]) {
-      // i has not been marked -- it is prime
-      primes.push(i);
-      for (j = i << 1; j <= max; j += i) {
-        sieve[j] = true;
-      }
-    }
-  }
-  return primes;
-};
-
-//////
+//Module for simple utilities functions
+const uFuncs = require("./utilitiesFunctions.js");
 
 // Tasks Functions Starting here ///
 
 ///////////////////////////////////
 //////////////////////////////////
 const task1 = (a, b) => {
-  const isValidData = validateData([a, b]);
+  const isValidData = dataV.validateData([a, b]);
   if (!isValidData) {
-    console.log("Data is not valid", a, b);
     throw new Error(
       "Data is not valid. Please enter whole numbers between 2 and 100 inclusive."
     );
   }
 
-  const isWholeNum = validateIsWholeNum([a, b]);
+  const isWholeNum = dataV.validateIsWholeNum([a, b]);
 
   if (!isWholeNum) {
-    console.log("Data is not a whole number", a, b);
     throw new Error(
       "Data is not a whole number. Please enter whole numbers between 2 and 100 inclusive."
     );
   }
 
-  const isWithinRange = validateThreshold([a, b], 2, 100);
+  const isWithinRange = dataV.validateThreshold([a, b], 2, 100);
 
   if (!isWithinRange) {
-    console.log("Out of range", a, b);
     throw new Error(
       "Data is out of range. Please enter whole numbers between 2 and 100 inclusive."
     );
   }
 
-  const validData = strToWholeNum([a, b]).sort((a, b) => a - b);
+  const validData = uFuncs.strToWholeNum([a, b]).sort((a, b) => a - b);
   const combinations = [];
 
   for (let i = validData[0]; i <= validData[1]; i++) {
@@ -102,22 +53,24 @@ const task1 = (a, b) => {
 
 const task2 = (maxN) => {
   let answer = -1;
-  const isWithinRange = validateThreshold([maxN], 2, 100000);
+  const isWithinRange = dataV.validateThreshold([maxN], 2, 100000);
 
   if (!isWithinRange) {
-    console.log("Out of range");
     throw new Error(
       "The upper limit is out of range. Please enter a number between 2 and 100000"
     );
   }
   const maxPrime = maxN;
-  const primeList = getPrimeNums(maxPrime);
+  //Get list of primes
+  const primeList = uFuncs.getPrimeNums(maxPrime);
 
   const iterateSum = (n) => {
     let found = false;
+    //Start iteration for each number
     for (let i = 0; primeList[i] <= n; i++) {
       const sumNum = primeList[i];
       for (let j = 0; sumNum + 2 * Math.pow(j, 2) <= n; j++) {
+        //Iterate for every possible combination sum
         const sum = sumNum + 2 * Math.pow(j, 2);
         if (sum === n) {
           found = true;
@@ -128,21 +81,22 @@ const task2 = (maxN) => {
         break;
       }
     }
-    if (!found) {
-      console.log("this number does not have a sum", n);
-    }
     return found;
   };
 
   for (let i = 2; i <= maxN; i++) {
     const isComposite = !primeList.includes(i);
     const isOdd = i % 2 !== 0;
+    //Skip the step if the number is not odd or not composite
     if (!isOdd || !isComposite) {
       continue;
     }
 
     const found = iterateSum(i);
     if (!found) {
+      //If no possible combination is found after going through
+      //every possible combinatio, then the `number` is found
+      //break the loop at this stage and return the number
       answer = i;
       break;
     }
@@ -151,27 +105,24 @@ const task2 = (maxN) => {
 };
 
 const task3 = (nMax) => {
-  const isValidData = validateData([nMax]);
+  const isValidData = dataV.validateData([nMax]);
   if (!isValidData) {
-    console.log("Data is not valid", nMax);
     throw new Error(
       "Data is not valid. Please enter natural numbers between 1 and 1000 inclusive."
     );
   }
 
-  const isWholeNum = validateIsWholeNum([nMax]);
+  const isWholeNum = dataV.validateIsWholeNum([nMax]);
 
   if (!isWholeNum) {
-    console.log("Data is not a whole number", nMax);
     throw new Error(
       "Data is not a whole number. Please enter whole numbers between 1 and 1000 inclusive."
     );
   }
 
-  const isWithinRange = validateThreshold([nMax], 1, 1000);
+  const isWithinRange = dataV.validateThreshold([nMax], 1, 1000);
 
   if (!isWithinRange) {
-    console.log("Out of range", nMax);
     throw new Error(
       "Data is out of range. Please enter whole numbers between 1 and 1000 inclusive."
     );
@@ -180,16 +131,21 @@ const task3 = (nMax) => {
   let sum = 0;
 
   for (let i = 1; i <= nMax; i++) {
+    //Loop through all numbers
     const sqrt = Math.sqrt(i);
     const numIsSquare = Math.ceil(sqrt) === Math.floor(sqrt);
 
-    //Handle in a different way if the number is q perfect square.
+    //Skip the step if the number is a perfect square.
     if (numIsSquare) {
       continue;
     }
+    //Configure bignumber to handle precision loss
     BigNumber.config({ DECIMAL_PLACES: 110 });
     const bigN = new BigNumber(i);
     const preciseSqrt = bigN.sqrt();
+    //This is a unique step to handle the number, just the way
+    //how this specific library works. Here we, extract decimal
+    //from an object's property and accumulate in string type.
     let decimals = preciseSqrt.c.slice(1).reduce((acc, value) => {
       value = value + "";
       if (value.length < 14) {
@@ -204,6 +160,7 @@ const task3 = (nMax) => {
 
     let decimalSum = 0;
     for (let i = 0; i < 100; i++) {
+      //Convert the string digits to number and add sum
       const decimalInt = Number(nthDecimal.charAt(i));
       decimalSum += decimalInt;
     }
@@ -219,14 +176,18 @@ const task4 = (nMax) => {
   const nWays = new Array(nMax + 1).fill(0);
 
   nWays[0] = 1;
-
+  //Create a list of numbers for easy retrieval of index
   for (let i = 1; i < nMax + 1; i++) {
     numList.push(i);
   }
 
   for (let i = 0; i < numList.length - 1; i++) {
+    //currenNum refers to the number of which we want the
+    //number of combinations
     const currentNum = numList[i];
     for (let j = 0; j < nWays.length - currentNum; j++) {
+      //sum the number of combinations that can be made,
+      //referenced in the nWays array at that particular index.
       nWays[j + currentNum] += nWays[j];
     }
   }
@@ -236,17 +197,22 @@ const task4 = (nMax) => {
 
 const task5 = (percent, N) => {
   let bouncyN = 0;
+  //personal preferance for `for loops` over while, for ease of
+  //understanding nesting and value assignment
   N = Number.MAX_SAFE_INTEGER;
   let num = 0;
   for (let i = 1; i < N + 1; i++) {
+    //Assign false to all default values assuming the number has not
+    //bounced yet
     let hasBounced = false;
     let hasIncreased = false;
     let hasDecreased = false;
 
+    //current number tracked with index i
     let currentNum = i;
     let prevDigit = currentNum % 10;
     currentNum = Math.floor(currentNum / 10);
-
+    //get last digit and keep on decreasing the number by a factor of 10
     while (currentNum !== 0 && !hasBounced) {
       let currentDigit = currentNum % 10;
       if (prevDigit > currentDigit) {
@@ -255,15 +221,20 @@ const task5 = (percent, N) => {
         hasDecreased = true;
       }
 
+      //If the number has both increased and decreased it has bounced
       if ((hasIncreased && hasDecreased) || hasBounced) {
+        //add the counter if the number bounced
         bouncyN += 1;
         hasBounced = true;
       }
 
+      //repeat the process for each digit
       prevDigit = currentDigit;
       currentNum = Math.floor(currentNum / 10);
     }
 
+    //if the percentage reaches the required threshold break the loop
+    //and return the current index
     if ((bouncyN / i) * 100 >= percent) {
       num = i;
       break;
@@ -273,6 +244,7 @@ const task5 = (percent, N) => {
 };
 
 const task6 = (firstP, secondP, lMax, rMax) => {
+  //Utilties function for ease of understanding its purpose
   const getEllipseSlope = (x, y) => (-4 * x) / y;
   const getNormal = (m) => 1 / -m;
   const getSlopeByPoint = (firstP, secondP) =>
@@ -283,11 +255,12 @@ const task6 = (firstP, secondP, lMax, rMax) => {
   const solveForX = (a, b, c) => {
     const px = (-b + Math.sqrt(b * b - 4 * a * c)) / (2 * a);
     const nx = (-b - Math.sqrt(b * b - 4 * a * c)) / (2 * a);
-
     return [px, nx];
   };
+  ///////////////////////////////////////
 
   let n = 0;
+  //validate data
   const isValidData = [
     firstP.x,
     firstP.y,
@@ -298,19 +271,22 @@ const task6 = (firstP, secondP, lMax, rMax) => {
   ].every((n) => !isNaN(Number(n)));
 
   if (!isValidData) {
-    console.log("Data is not valid");
     throw new Error(
       "Data is not valid. Please enter whole numbers between -5 and 5 inclusive for x Co-ordinate, numbers between 15 and -15 for y Co-ordinate and -5 to 5 for the limit."
     );
   }
 
-  const isWithinRange1 = validateThreshold(
+  const isWithinRange1 = dataV.validateThreshold(
     [firstP.x, secondP.x, lMax, rMax],
     -5,
     5
   );
 
-  const isWithinRange2 = validateThreshold([firstP.y, secondP.y], -15, 15);
+  const isWithinRange2 = dataV.validateThreshold(
+    [firstP.y, secondP.y],
+    -15,
+    15
+  );
 
   if (!isWithinRange1 || !isWithinRange2) {
     throw new Error(
@@ -318,35 +294,38 @@ const task6 = (firstP, secondP, lMax, rMax) => {
     );
   }
 
+  //Loop for a very high number
   for (let i = 0; i < Number.MAX_SAFE_INTEGER; i++) {
     n = i;
+    //break the loop if the second point already exits the ellipse
     if (Math.abs(secondP.x) <= 0.01 && secondP.y > 0) {
       break;
     }
+
+    //Or else calculate the necessary geometric numbers
     const m1 = getSlopeByPoint(firstP, secondP);
     const eSlope = getEllipseSlope(secondP.x, secondP.y);
     const normal = getNormal(eSlope);
     const angle1 = getAngleBySlopes(m1, normal);
     const m2 = getSlopeByAngle(angle1, normal);
 
+    //Get y Intercept for equation of line
     const c = secondP.y - m2 * secondP.x;
-    const x3Str = solveForX(4 + m2 * m2, 2 * c * m2, c * c - 100).sort(
+
+    const x3Arr = solveForX(4 + m2 * m2, 2 * c * m2, c * c - 100).sort(
       (a, b) => Math.abs(secondP.x - a) - Math.abs(secondP.x - b)
     );
 
-    console.log("x3str", x3Str);
-    const x3 = x3Str[1];
+    //Get the `other` x point where the line is supposed to go to.
+    const x3 = x3Arr[1];
 
     const y3 = m2 * x3 + c;
 
     const p3 = { x: x3, y: y3 };
-    console.log("p1", firstP);
-    console.log("p2", secondP);
-    console.log("p3", p3);
+    //Calculate the new point and re assign the new values to the older ones
+    //and repeat until the line exits from the given threshold
     firstP = secondP;
     secondP = p3;
-    console.log("p1 r", firstP);
-    console.log("p2 R", secondP);
   }
 
   return n;
@@ -369,6 +348,4 @@ module.exports = {
   task5,
   task6,
   task7,
-  validateIsWholeNum,
-  validateThreshold,
 };
