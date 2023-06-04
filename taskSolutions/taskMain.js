@@ -334,19 +334,14 @@ const task6 = (firstP, secondP, lMax, rMax) => {
       (a, b) => Math.abs(secondP.x - a) - Math.abs(secondP.x - b)
     );
 
-    console.log("x3str", x3Str);
     const x3 = x3Str[1];
 
     const y3 = m2 * x3 + c;
 
     const p3 = { x: x3, y: y3 };
-    console.log("p1", firstP);
-    console.log("p2", secondP);
-    console.log("p3", p3);
+
     firstP = secondP;
     secondP = p3;
-    console.log("p1 r", firstP);
-    console.log("p2 R", secondP);
   }
 
   return n;

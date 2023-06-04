@@ -10,7 +10,6 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/:taskId", function (req, res, next) {
-  console.log("taskId", req.params.taskId);
   const taskID = req.params.taskId;
   const isWholeNum = TASKS.validateIsWholeNum([taskID]);
   const isInRange = TASKS.validateThreshold([taskID], 1, 7);
