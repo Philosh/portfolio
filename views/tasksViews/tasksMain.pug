@@ -1,0 +1,36 @@
+include cssAssets.pug
+include sideBar.pug
+
+// ======== main-wrapper start ===========
+main.main-wrapper
+  // ========== header start ==========
+  header.header
+    .container-fluid
+      .row
+        .col-lg-5.col-md-5.col-6
+          .header-left.d-flex.align-items-center
+            .menu-toggle-btn.mr-20
+              button#menu-toggle.main-btn.primary-btn.btn-hover
+                i.lni.lni-chevron-left.me-2
+                |  Menu
+  // ========== header end ==========
+  // ========== section start ==========
+  section
+    .container-fluid
+      // ========== title-wrapper start ==========
+      .title-wrapper.pt-30
+        .row.align-items-center
+          .col-md-6
+            .title.d-flex.align-items-center.flex-wrap.mb-30
+              h2.mr-40 Introduction
+        // end row
+      // ========== title-wrapper end ==========
+      // Invoice Wrapper Start
+
+      include introDesc.pug
+
+      // Invoice Wrapper End
+    // end container
+  // ========== section end ==========
+// ======== main-wrapper end ===========
+include jsLoad.pug
