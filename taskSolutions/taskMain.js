@@ -1,6 +1,7 @@
+//Module to handle number with huge float point values
 const BigNumber = require("bignumber.js");
 
-//Data Validation funcitions
+//Data Validation functions
 const validateData = (dataArr) => {
   return dataArr.every((data) => {
     return data;
@@ -13,7 +14,7 @@ const validateIsWholeNum = (dataArr) => {
   });
 };
 
-// Threshold Inclusive
+// Check if within Threshold Inclusive
 const validateThreshold = (
   dataArr,
   lowT = -Number.MAX_VALUE,
@@ -60,7 +61,6 @@ const getPrimeNums = (max) => {
 const task1 = (a, b) => {
   const isValidData = validateData([a, b]);
   if (!isValidData) {
-    console.log("Data is not valid", a, b);
     throw new Error(
       "Data is not valid. Please enter whole numbers between 2 and 100 inclusive."
     );
@@ -69,7 +69,6 @@ const task1 = (a, b) => {
   const isWholeNum = validateIsWholeNum([a, b]);
 
   if (!isWholeNum) {
-    console.log("Data is not a whole number", a, b);
     throw new Error(
       "Data is not a whole number. Please enter whole numbers between 2 and 100 inclusive."
     );
@@ -78,7 +77,6 @@ const task1 = (a, b) => {
   const isWithinRange = validateThreshold([a, b], 2, 100);
 
   if (!isWithinRange) {
-    console.log("Out of range", a, b);
     throw new Error(
       "Data is out of range. Please enter whole numbers between 2 and 100 inclusive."
     );
@@ -105,7 +103,6 @@ const task2 = (maxN) => {
   const isWithinRange = validateThreshold([maxN], 2, 100000);
 
   if (!isWithinRange) {
-    console.log("Out of range");
     throw new Error(
       "The upper limit is out of range. Please enter a number between 2 and 100000"
     );
@@ -127,9 +124,6 @@ const task2 = (maxN) => {
       if (found) {
         break;
       }
-    }
-    if (!found) {
-      console.log("this number does not have a sum", n);
     }
     return found;
   };
@@ -153,7 +147,6 @@ const task2 = (maxN) => {
 const task3 = (nMax) => {
   const isValidData = validateData([nMax]);
   if (!isValidData) {
-    console.log("Data is not valid", nMax);
     throw new Error(
       "Data is not valid. Please enter natural numbers between 1 and 1000 inclusive."
     );
@@ -162,7 +155,6 @@ const task3 = (nMax) => {
   const isWholeNum = validateIsWholeNum([nMax]);
 
   if (!isWholeNum) {
-    console.log("Data is not a whole number", nMax);
     throw new Error(
       "Data is not a whole number. Please enter whole numbers between 1 and 1000 inclusive."
     );
@@ -171,7 +163,6 @@ const task3 = (nMax) => {
   const isWithinRange = validateThreshold([nMax], 1, 1000);
 
   if (!isWithinRange) {
-    console.log("Out of range", nMax);
     throw new Error(
       "Data is out of range. Please enter whole numbers between 1 and 1000 inclusive."
     );
@@ -298,7 +289,6 @@ const task6 = (firstP, secondP, lMax, rMax) => {
   ].every((n) => !isNaN(Number(n)));
 
   if (!isValidData) {
-    console.log("Data is not valid");
     throw new Error(
       "Data is not valid. Please enter whole numbers between -5 and 5 inclusive for x Co-ordinate, numbers between 15 and -15 for y Co-ordinate and -5 to 5 for the limit."
     );
