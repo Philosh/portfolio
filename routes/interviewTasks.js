@@ -10,7 +10,7 @@ router.get("/", function (req, res, next) {
 });
 
 router.get("/:taskId", function (req, res, next) {
-  console.log("params", req.params.taskId);
+  console.log("taskId", req.params.taskId);
   const taskID = req.params.taskId;
   const isWholeNum = TASKS.validateIsWholeNum([taskID]);
   const isInRange = TASKS.validateThreshold([taskID], 1, 7);
@@ -26,6 +26,14 @@ router.get("/:taskId", function (req, res, next) {
     6: TASKS.task6,
     7: TASKS.task7,
   };
+
+  const taskDefParams = {
+    1: [2, 100],
+    2: [10000],
+    3: [100],
+    4: [100],
+    5: [99],
+  };
   //const answer1 = TASKS.task1(2, "100");
   //console.log("answer1", answer1);
 
@@ -39,10 +47,9 @@ router.get("/:taskId", function (req, res, next) {
   // console.log(("answer4", answer4));
 
   const taskFunc = taskIdFunc[taskID];
-  const answer = taskFunc(2, "100");
+  const defParams = taskDefParams[taskID];
+  const answer = taskFunc(...defParams);
   console.log("answer", answer);
-  const answer1 = TASKS.task1(2, "100");
-  console.log("answer5", answer1);
   res.render("tasksViews/tasksMain", {
     ans: answer,
     taskId: taskID,

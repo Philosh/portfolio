@@ -122,8 +122,6 @@ const task2 = (maxN) => {
       for (let j = 0; sumNum + 2 * Math.pow(j, 2) <= n; j++) {
         const sum = sumNum + 2 * Math.pow(j, 2);
         if (sum === n) {
-          console.log("this number does have a sum", n);
-          console.log("the sum is", sumNum + "+" + "2 * " + j + "^2 = " + sum);
           found = true;
           break;
         }
@@ -151,7 +149,7 @@ const task2 = (maxN) => {
       break;
     }
   }
-  return primeList;
+  return -1;
 };
 
 const task3 = (nMax) => {
