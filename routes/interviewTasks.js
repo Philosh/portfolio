@@ -19,9 +19,12 @@ router.get("/1", function (req, res, next) {
   // const answer3 = TASKS.task3(100);
   // console.log("answer3", answer3);
 
-  const answer4 = TASKS.task4(100);
-  console.log(("answer4", answer4));
-  res.render("tasksViews/tasksDev", { ans: answer4 });
+  // const answer4 = TASKS.task4(100);
+  // console.log(("answer4", answer4));
+
+  const answer5 = TASKS.task5(0, 200);
+  console.log("answer5", answer5);
+  res.render("tasksViews/tasksDev", { ans: answer5 });
 });
 
 module.exports = router;

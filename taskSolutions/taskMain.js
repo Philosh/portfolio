@@ -238,9 +238,56 @@ const task4 = (nMax) => {
   return nWays[nWays.length - 1];
 };
 
+const task5 = (percent, N) => {
+  let bouncyN = 0;
+  console.log("N", N);
+  for (let i = 1; i < N; i++) {
+    // if (i !== 101) {
+    //   continue;
+    // }
+
+    let hasBounced = false;
+    let hasIncreased = false;
+    let hasDecreased = false;
+
+    let currentNum = i;
+    // console.log("currentNum", currentNum);
+    let prevDigit = currentNum % 10;
+    currentNum = Math.floor(currentNum / 10);
+
+    while (currentNum !== 0 && !hasBounced) {
+      let currentDigit = currentNum % 10;
+      if (prevDigit > currentDigit) {
+        hasIncreased = true;
+      } else if (prevDigit < currentDigit) {
+        hasDecreased = true;
+      } else if (prevDigit === currentDigit) {
+        hasBounced = true;
+      }
+
+      // console.log("currentDigit", currentDigit);
+      // console.log("prevDigit", prevDigit);
+      // console.log("hasDecreased", hasDecreased);
+      // console.log("hasIncreased", hasIncreased);
+
+      if (hasIncreased && hasDecreased) {
+        console.log("bouncy N", i);
+        bouncyN += 1;
+        hasBounced = true;
+      }
+
+      prevDigit = currentDigit;
+      currentNum = Math.floor(currentNum / 10);
+    }
+  }
+
+  return (bouncyN / N) * 100;
+};
+
 module.exports = {
   task1,
   task2,
   task3,
   task4,
+  task5,
 };
