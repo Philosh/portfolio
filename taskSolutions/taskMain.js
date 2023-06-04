@@ -51,15 +51,12 @@ const getPrimeNums = (max) => {
   return primes;
 };
 
-const padZeroFront = (totalLength, text) => {
-  if (text.length < totalLength) {
-  }
-  return n < 10 ? "0" + n : n;
-};
-
 //////
 
-// Tasks Functions
+// Tasks Functions Starting here ///
+
+///////////////////////////////////
+//////////////////////////////////
 const task1 = (a, b) => {
   const isValidData = validateData([a, b]);
   if (!isValidData) {
@@ -275,13 +272,94 @@ const task5 = (percent, N) => {
   return num;
 };
 
-const task6 = () => {
-  return;
+const task6 = (firstP, secondP, lMax, rMax) => {
+  const getEllipseSlope = (x, y) => (-4 * x) / y;
+  const getNormal = (m) => 1 / -m;
+  const getSlopeByPoint = (firstP, secondP) =>
+    (secondP.y - firstP.y) / (secondP.x - firstP.x);
+  const getAngleBySlopes = (m1, m2) => Math.atan((m1 - m2) / (1 + m1 * m2));
+  const getSlopeByAngle = (ang, m) =>
+    (m - Math.tan(ang)) / (m * Math.tan(ang) + 1);
+  const solveForX = (a, b, c) => {
+    const px = (-b + Math.sqrt(b * b - 4 * a * c)) / (2 * a);
+    const nx = (-b - Math.sqrt(b * b - 4 * a * c)) / (2 * a);
+
+    return [px, nx];
+  };
+
+  let n = 0;
+  const isValidData = [
+    firstP.x,
+    firstP.y,
+    secondP.x,
+    secondP.y,
+    lMax,
+    rMax,
+  ].every((n) => !isNaN(Number(n)));
+
+  if (!isValidData) {
+    console.log("Data is not valid");
+    throw new Error(
+      "Data is not valid. Please enter whole numbers between -5 and 5 inclusive for x Co-ordinate, numbers between 15 and -15 for y Co-ordinate and -5 to 5 for the limit."
+    );
+  }
+
+  const isWithinRange1 = validateThreshold(
+    [firstP.x, secondP.x, lMax, rMax],
+    -5,
+    5
+  );
+
+  const isWithinRange2 = validateThreshold([firstP.y, secondP.y], -15, 15);
+
+  if (!isWithinRange1 || !isWithinRange2) {
+    throw new Error(
+      "Data is out of range. Please enter whole numbers between -5 and 5 inclusive for x Co-ordinate, numbers between 15 and -15 for y Co-ordinate and -5 to 5 for the limit."
+    );
+  }
+
+  for (let i = 0; i < Number.MAX_SAFE_INTEGER; i++) {
+    n = i;
+    if (Math.abs(secondP.x) <= 0.01 && secondP.y > 0) {
+      break;
+    }
+    const m1 = getSlopeByPoint(firstP, secondP);
+    const eSlope = getEllipseSlope(secondP.x, secondP.y);
+    const normal = getNormal(eSlope);
+    const angle1 = getAngleBySlopes(m1, normal);
+    const m2 = getSlopeByAngle(angle1, normal);
+
+    const c = secondP.y - m2 * secondP.x;
+    const x3Str = solveForX(4 + m2 * m2, 2 * c * m2, c * c - 100).sort(
+      (a, b) => Math.abs(secondP.x - a) - Math.abs(secondP.x - b)
+    );
+
+    console.log("x3str", x3Str);
+    const x3 = x3Str[1];
+
+    const y3 = m2 * x3 + c;
+
+    const p3 = { x: x3, y: y3 };
+    console.log("p1", firstP);
+    console.log("p2", secondP);
+    console.log("p3", p3);
+    firstP = secondP;
+    secondP = p3;
+    console.log("p1 r", firstP);
+    console.log("p2 R", secondP);
+  }
+
+  return n;
 };
 
 const task7 = () => {
   return;
 };
+
+// Tasks Functions Ending here ///
+
+///////////////////////////////////
+//////////////////////////////////
 
 module.exports = {
   task1,
