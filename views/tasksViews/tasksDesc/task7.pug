@@ -17,7 +17,7 @@
                 .address-item
                   p.text-sm
                     span.text-medium
-                    | This web application too could be considered for this task. Additionally, I had mentioned in my resume one of the projects that is public <a href="https://saugatawale.com/satellite">Satellite Visualization</a>. It is a cesium.js based web application for focused mainly for aerodynamic simulations.
+                    | This web application could be considered for this task. Additionally, I had mentioned in my resume one of the projects that is public <a href="https://saugatawale.com/satellite">Satellite Visualization</a>. It is a cesium.js based web application for focused mainly for aerodynamic simulations.
                     br
                     br
                     |The aim of this project was to find an orbit of the satellite around the globe and represent it in real time. For example, the satellite's position on the globe. In 
@@ -38,10 +38,10 @@
                     br
                     br
                     |Speaking of the technology stack to use, I would personally prefer the web application to run in a node environment with Express.js in the backend and either React or Next.js for the front end. For database, either mongoDB for the noSQL and postgresql for the sql database, and the all the independent services would be hosted inside a docker container in a linux/ubuntu environment. The general idea would be to keep things simple and not give much focus to fancy or premium tools, rather trying to utilize frameworks and libraries with strong community base and solid documentation.
-                    |However, if the application is too data heavy and requires manipulation of data a lot and has mandated heavier mathematical calculations and statististical formulas then the backedn would be run on a python based server. Either django or flask would be a good options. Those server would wrapped inside of gunicorn server and ultimately that would be exposed via nginx/apache servers particular networks rules/firewalls and other network settings. Python server would be used especially if it is required to run AI/machine learning based services.
+                    |However, if the application is too data heavy and requires manipulation of data a lot and has mandated heavier mathematical calculations and statististical formulas then the backend would be run on a python based server. Either django or flask would be good options. Those server would be wrapped inside of gunicorn server and ultimately that would be exposed via nginx/apache servers with particular networks rules/firewalls and other network settings such cache features, load balancing etc. Python server would be used especially if it is required to run AI/machine learning based services.
                     br
                     br
-                    |Regarding the user access in AWS, of course it be defined by user policies/user groups via IAM tool and logging in using a ubikey for developers would be a good idea, obviously with additional 2 factor authentication. Additionally, expanding on the security feature, if the service is exposed to the outer world, an SSL cerificate for the domain would be needed. Basic rules of thumbs such as not exposing environment variables and not hardcoding API KEYS are also good security practices. Periodic snapshots and backups of the services would also need to be taken and AWS provides such service already.
+                    |Regarding the user access in AWS, of course it will be defined by user policies/user groups via IAM tool and logging in using a ubikey for developers would be a good idea, obviously with additional 2 factor authentication. Additionally, expanding on the security feature, if the service is exposed to the outer world, an SSL cerificate for the domain would be needed. Basic rules of thumbs such as not exposing environment variables and not hardcoding API KEYS are also good security practices. Periodic snapshots and backups of the services would also need to be taken and AWS provides such service already.
                     br
                     br
                     |Expanding on the information regarding hosting, the front-end and the back-end would be two uncorrelated and independent services running on their own containers and the database would be running on its own service. That way, it would be easier to implement the microservices archititecture and make scalability, migration and maintenance easier.
@@ -50,11 +50,11 @@
                     |For deployment I would keep things simple and use github actions since most of the code has been hosted on github and it is easier to integrate. 
                     br
                     br
-                    |All of the services would containerized in docker-compose with development, production and testing sub sections. If the number of services get too huge and deployment becomes more strenuous, I would introduce Kubernetes and integrate it with AWS CDK.
+                    |All of the services would containerized via docker-compose with development, production and testing sub sections. If the number of services get too huge and deployment becomes more strenuous, I would introduce Kubernetes and integrate it with AWS CDK.
                     br
                     br
-                    |Regarding the availability of the service, there would be a logger which would log all the errors and archive it and cache it. Also, we would have to be careful from the ground up on which errors we would catch and which we would wanna bypass. Personally, I would want the errors to come up but it could seriously affect the availability of the service. Hence, for that the errors would have to be logged and stored for later analysis for debugging purposes. There could also be a monitoring service or a 'heartbeat' service which periodically checks for the uptime of the service. Or other way round 
-                    |that service sends a periodic beacon summarizing the statuses of its containers. This could be implemented via AWS SQS and Cloudwatch.
+                    |Regarding the availability of the service, there would be a logger which would log all the errors cache it and eventually archive it. Also, we would have to be careful from the ground up on which errors we would catch and which we would wanna bypass. Personally, I would want the errors to come up but it could seriously affect the availability of the service. Hence, for that the errors would have to be logged and stored for later analysis for debugging purposes. There could also be a monitoring service or a 'heartbeat' service which periodically checks for the uptime of the service. Or other way round 
+                    |that the service sends a periodic beacon summarizing the statuses of its containers. This could be implemented via AWS SQS and Cloudwatch.
           // End Card
         // ENd Col
         // End Row
