@@ -281,7 +281,7 @@ const task5 = (percent, N) => {
     }
   }
 
-  return (bouncyN / N) * 100;
+  return ((bouncyN + 1) / N) * 100;
 };
 
 module.exports = {
