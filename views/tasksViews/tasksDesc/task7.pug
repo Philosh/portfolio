@@ -10,7 +10,43 @@
                   p.text-sm
                     span.text-medium
                       | 7. Share a sample of your web development work, such as a React component or similar, along with a sample REST handler that communicates with it. If you can please also explain, on a high level, how you would host a web service in the AWS cloud. Discuss the relevant AWS services that would be used for hosting, deployment, data storage and scalability. Consider factors like security, availability, and network connectivity between the cloud and typical work networks.
-
+        .row
+          .col-12
+            .invoice-card.card-style.mb-30
+              .invoice-address
+                .address-item
+                  p.text-sm
+                    span.text-medium
+                    | This web application too could be considered for this task. Additionally, I had mentioned in my resume one of the projects that is public <a href="https://saugatawale.com/satellite">Satellite Visualization</a>. It is a cesium.js based web application for focused mainly for aerodynamic simulations.
+                    br
+                    br
+                    |The aim of this project was to find an orbit of the satellite around the globe and represent it in real time. For example, the satellite's position on the globe. In 
+                    | this example it shows the position of International Space Station. And the idea was to display a constellation of satellites all around the globe which is easier after one satellite is displayed. Because all of the satellite's orbit could be predicted by <a href="https://celestrak.org/publications/AIAA/2008-6770/AIAA-2008-6770.pdf">SGP4 algorithm</a>. There might be some error in prediction as TLE elements are not updated frequently and is stored locally as to achieve self-sufficiency 
+                    | of the project.
+                    br
+                    br
+                    |More details about this project regarding the algorithm and its implementation can be found <a href="https://www.theseus.fi/bitstream/handle/10024/344839/Satellite_Visualization_Thesis.pdf?sequence=2&isAllowed=y">here.</a> Currently the application is hosted in fly server. It just has to be updated on the master branch in github and the deployment has to be done manually; deployment has not been automated.
+                    br
+                    br
+                    |Similarly other interesting and relatable project conducted was from plotly.js and grafana. It was used as data analysis tool where the huge amount of data from satellite was downloaded and it was parsed, transformed and loaded into AWS services. The data was requested from AWS services itself and the graph was plotted in the frontend either from plotly and if the data needs to customized by the user, grafana service was used. The data was stored in S3 with partitions according to time frame and variable names. It was requested from Athena.
+                    br
+                    br
+                    |All of the services were run in EC2 instances and containerized in docker. For data storages of small to medium size RDS service was used.
+                    br
+                    br
+                    |If I had to host an AWS service myself, I would choose EC2 instance for hosting the service. RDS for databases with small memory sizes and Athena/Glue/S3 for data with bigger sizes. If retrieving data with as lowest latency as possible is required dynamoDB would be used. If the web service is not targetted for retail customers and is meant for in-house use and/or only for employees or specific departments, it could be hosted on a VPC if the company has one or restrict the access to only whitelisted IP addresses, so that it would not be exposed to the outer Internet.
+                    br
+                    br
+                    |Regarding the user access, using ubicode for each user would be a good idea, obviously with additional 2 factor authentication for each user. Additionally, expanding on the security feature, if the service is exposed to the outer world, an SSL cerificate for the domain would be needed. Basic rules of thumbs such as not exposing environment variables and not hardcoding API KEYS are also good security practices. Periodic snapshots and backups of the services would also need to be taken and AWS provies such service already.
+                    br
+                    br
+                    |Expanding on the information regarding hosting, the front-end and the back-end would be two uncorrelated and independent services running on their own containers and the database would be running on its own service. That way, it would be easier to implement the microservices archititecture and make scalability, migration and maintenance easier.
+                    br
+                    br
+                    |For deployment I would keep things simple and use github actions since most of the code has been hosted on github and it is easier to integrate. 
+                    br
+                    br
+                    |All of the services would containerized in docker-compose with development, production and testing sub sections. If the number of services get too huge and deployment becomes more strenuous, I would introduce Kubernetes and integrate it with AWS CDK.
           // End Card
         // ENd Col
         // End Row
