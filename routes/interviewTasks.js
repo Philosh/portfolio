@@ -33,6 +33,8 @@ router.get("/:taskId", function (req, res, next) {
     3: [100],
     4: [100],
     5: [99],
+    6: [],
+    7: [],
   };
   //const answer1 = TASKS.task1(2, "100");
   //console.log("answer1", answer1);

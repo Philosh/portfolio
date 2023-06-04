@@ -104,6 +104,7 @@ const task1 = (a, b) => {
 };
 
 const task2 = (maxN) => {
+  let answer = -1;
   const isWithinRange = validateThreshold([maxN], 2, 100000);
 
   if (!isWithinRange) {
@@ -145,11 +146,11 @@ const task2 = (maxN) => {
 
     const found = iterateSum(i);
     if (!found) {
-      console.log("The number without sum is", i);
+      answer = i;
       break;
     }
   }
-  return -1;
+  return answer;
 };
 
 const task3 = (nMax) => {
@@ -238,20 +239,14 @@ const task4 = (nMax) => {
 
 const task5 = (percent, N) => {
   let bouncyN = 0;
-  console.log("N", N);
   N = Number.MAX_SAFE_INTEGER;
   let num = 0;
   for (let i = 1; i < N + 1; i++) {
-    // if (i !== 101) {
-    //   continue;
-    // }
-
     let hasBounced = false;
     let hasIncreased = false;
     let hasDecreased = false;
 
     let currentNum = i;
-    // console.log("currentNum", currentNum);
     let prevDigit = currentNum % 10;
     currentNum = Math.floor(currentNum / 10);
 
@@ -263,13 +258,7 @@ const task5 = (percent, N) => {
         hasDecreased = true;
       }
 
-      // console.log("currentDigit", currentDigit);
-      // console.log("prevDigit", prevDigit);
-      // console.log("hasDecreased", hasDecreased);
-      // console.log("hasIncreased", hasIncreased);
-
       if ((hasIncreased && hasDecreased) || hasBounced) {
-        console.log("bouncy N", i);
         bouncyN += 1;
         hasBounced = true;
       }
@@ -278,20 +267,21 @@ const task5 = (percent, N) => {
       currentNum = Math.floor(currentNum / 10);
     }
 
-    console.log("%", (bouncyN / i) * 100);
-    console.log("i", i);
     if ((bouncyN / i) * 100 >= percent) {
       num = i;
       break;
     }
   }
-  console.log("num", num);
   return num;
 };
 
-const task6 = () => {};
+const task6 = () => {
+  return;
+};
 
-const task7 = () => {};
+const task7 = () => {
+  return;
+};
 
 module.exports = {
   task1,
