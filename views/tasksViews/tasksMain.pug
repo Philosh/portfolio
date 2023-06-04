@@ -38,7 +38,7 @@ main.main-wrapper
         when "6" : include tasksDesc/task6.pug
         when "7" : include tasksDesc/task7.pug
       
-      if taskId
+      if (taskId && taskId!=7)
         | The solution to the problem is #{ans}
       // Invoice Wrapper End
     // end container
