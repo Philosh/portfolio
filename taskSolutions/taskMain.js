@@ -291,10 +291,18 @@ const task5 = (percent, N) => {
   return num;
 };
 
+const task6 = () => {};
+
+const task7 = () => {};
+
 module.exports = {
   task1,
   task2,
   task3,
   task4,
   task5,
+  task6,
+  task7,
+  validateIsWholeNum,
+  validateThreshold,
 };
