@@ -16,10 +16,15 @@ router.get("/1", function (req, res, next) {
   //const answer2 = TASKS.task2(10000);
   //console.log("answer2", answer2);
 
-  const answer3 = TASKS.task3(100);
-  console.log("answer3", answer3);
+  // const answer3 = TASKS.task3(100);
+  // console.log("answer3", answer3);
 
-  res.render("tasksViews/tasksDev", { ans: answer3 });
+  // const answer4 = TASKS.task4(100);
+  // console.log(("answer4", answer4));
+
+  const answer5 = TASKS.task5(99);
+  console.log("answer5", answer5);
+  res.render("tasksViews/tasksDev", { ans: answer5 });
 });
 
 module.exports = router;

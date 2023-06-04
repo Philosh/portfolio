@@ -155,6 +155,32 @@ const task2 = (maxN) => {
 };
 
 const task3 = (nMax) => {
+  const isValidData = validateData([nMax]);
+  if (!isValidData) {
+    console.log("Data is not valid", nMax);
+    throw new Error(
+      "Data is not valid. Please enter natural numbers between 1 and 1000 inclusive."
+    );
+  }
+
+  const isWholeNum = validateIsWholeNum([nMax]);
+
+  if (!isWholeNum) {
+    console.log("Data is not a whole number", nMax);
+    throw new Error(
+      "Data is not a whole number. Please enter whole numbers between 1 and 1000 inclusive."
+    );
+  }
+
+  const isWithinRange = validateThreshold([nMax], 1, 1000);
+
+  if (!isWithinRange) {
+    console.log("Out of range", nMax);
+    throw new Error(
+      "Data is out of range. Please enter whole numbers between 1 and 1000 inclusive."
+    );
+  }
+
   let sum = 0;
 
   for (let i = 1; i <= nMax; i++) {
@@ -192,8 +218,83 @@ const task3 = (nMax) => {
   return sum;
 };
 
+const task4 = (nMax) => {
+  const numList = [];
+  const nWays = new Array(nMax + 1).fill(0);
+
+  nWays[0] = 1;
+
+  for (let i = 1; i < nMax + 1; i++) {
+    numList.push(i);
+  }
+
+  for (let i = 0; i < numList.length - 1; i++) {
+    const currentNum = numList[i];
+    for (let j = 0; j < nWays.length - currentNum; j++) {
+      nWays[j + currentNum] += nWays[j];
+    }
+  }
+
+  return nWays[nWays.length - 1];
+};
+
+const task5 = (percent, N) => {
+  let bouncyN = 0;
+  console.log("N", N);
+  N = Number.MAX_SAFE_INTEGER;
+  let num = 0;
+  for (let i = 1; i < N + 1; i++) {
+    // if (i !== 101) {
+    //   continue;
+    // }
+
+    let hasBounced = false;
+    let hasIncreased = false;
+    let hasDecreased = false;
+
+    let currentNum = i;
+    // console.log("currentNum", currentNum);
+    let prevDigit = currentNum % 10;
+    currentNum = Math.floor(currentNum / 10);
+
+    while (currentNum !== 0 && !hasBounced) {
+      let currentDigit = currentNum % 10;
+      if (prevDigit > currentDigit) {
+        hasIncreased = true;
+      } else if (prevDigit < currentDigit) {
+        hasDecreased = true;
+      }
+
+      // console.log("currentDigit", currentDigit);
+      // console.log("prevDigit", prevDigit);
+      // console.log("hasDecreased", hasDecreased);
+      // console.log("hasIncreased", hasIncreased);
+
+      if ((hasIncreased && hasDecreased) || hasBounced) {
+        console.log("bouncy N", i);
+        bouncyN += 1;
+        hasBounced = true;
+      }
+
+      prevDigit = currentDigit;
+      currentNum = Math.floor(currentNum / 10);
+    }
+
+    console.log("%", (bouncyN / i) * 100);
+    console.log("i", i);
+    if ((bouncyN / i) * 100 >= percent) {
+      num = i;
+      break;
+    }
+  }
+  console.log("num", num);
+  return num;
+};
+
 module.exports = {
   task1,
   task2,
   task3,
+  task4,
+  task5,
 };
