@@ -241,7 +241,9 @@ const task4 = (nMax) => {
 const task5 = (percent, N) => {
   let bouncyN = 0;
   console.log("N", N);
-  for (let i = 1; i < N; i++) {
+  N = Number.MAX_SAFE_INTEGER;
+  let num = 0;
+  for (let i = 1; i < N + 1; i++) {
     // if (i !== 101) {
     //   continue;
     // }
@@ -279,9 +281,16 @@ const task5 = (percent, N) => {
       prevDigit = currentDigit;
       currentNum = Math.floor(currentNum / 10);
     }
-  }
 
-  return ((bouncyN + 1) / N) * 100;
+    console.log("%", (bouncyN / i) * 100);
+    console.log("i", i);
+    if ((bouncyN / i) * 100 >= percent) {
+      num = i;
+      break;
+    }
+  }
+  console.log("num", num);
+  return num;
 };
 
 module.exports = {
