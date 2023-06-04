@@ -36,17 +36,6 @@ router.get("/:taskId", function (req, res, next) {
     6: [],
     7: [],
   };
-  //const answer1 = TASKS.task1(2, "100");
-  //console.log("answer1", answer1);
-
-  //const answer2 = TASKS.task2(10000);
-  //console.log("answer2", answer2);
-
-  // const answer3 = TASKS.task3(100);
-  // console.log("answer3", answer3);
-
-  // const answer4 = TASKS.task4(100);
-  // console.log(("answer4", answer4));
 
   const taskFunc = taskIdFunc[taskID];
   const defParams = taskDefParams[taskID];
