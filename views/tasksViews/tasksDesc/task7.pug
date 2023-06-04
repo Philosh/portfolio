@@ -37,7 +37,7 @@
                     |If I had to host an AWS service myself, I would choose EC2 instance for hosting the service. RDS for databases with small memory sizes and Athena/Glue/S3 for data with bigger sizes. If retrieving data with as lowest latency as possible is required dynamoDB would be used. If the web service is not targetted for retail customers and is meant for in-house use and/or only for employees or specific departments, it could be hosted on a VPC if the company has one or restrict the access to only whitelisted IP addresses, so that it would not be exposed to the outer Internet.
                     br
                     br
-                    |Regarding the user access, using ubicode for each user would be a good idea, obviously with additional 2 factor authentication for each user. Additionally, expanding on the security feature, if the service is exposed to the outer world, an SSL cerificate for the domain would be needed. Basic rules of thumbs such as not exposing environment variables and not hardcoding API KEYS are also good security practices. Periodic snapshots and backups of the services would also need to be taken and AWS provies such service already.
+                    |Regarding the user access, using ubicode for each user would be a good idea, obviously with additional 2 factor authentication for each user. Additionally, expanding on the security feature, if the service is exposed to the outer world, an SSL cerificate for the domain would be needed. Basic rules of thumbs such as not exposing environment variables and not hardcoding API KEYS are also good security practices. Periodic snapshots and backups of the services would also need to be taken and AWS provides such service already.
                     br
                     br
                     |Expanding on the information regarding hosting, the front-end and the back-end would be two uncorrelated and independent services running on their own containers and the database would be running on its own service. That way, it would be easier to implement the microservices archititecture and make scalability, migration and maintenance easier.
@@ -47,6 +47,10 @@
                     br
                     br
                     |All of the services would containerized in docker-compose with development, production and testing sub sections. If the number of services get too huge and deployment becomes more strenuous, I would introduce Kubernetes and integrate it with AWS CDK.
+                    br
+                    br
+                    |Regarding the availability of the service, there would be a logger which would log all the errors and archive it and cache it. Also, we would have to be careful from the ground up on which errors we would catch and which we would wanna bypass. Personally, I would want the errors to come up but it could seriously affect the availability of the service. Hence, for that the errors would have to be logged and stored for later analysis for debugging purposes. There could also be a monitoring service or a 'heartbeat' service which periodically checks for the uptime of the service. Or other way round 
+                    |that service sends a periodic beacon summarizing the statuses of its containers. This could be implemented via AWS SQS and Cloudwatch.
           // End Card
         // ENd Col
         // End Row
