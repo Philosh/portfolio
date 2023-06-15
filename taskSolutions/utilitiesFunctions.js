@@ -23,9 +23,19 @@ const getPrimeNums = (max) => {
   return primes;
 };
 
+const isJson = (jsonObj) => {
+  try {
+    JSON.parse(jsonObj);
+  } catch (e) {
+    return false;
+  }
+  return true;
+};
+
 //////
 
 module.exports = {
   strToWholeNum,
   getPrimeNums,
+  isJson,
 };

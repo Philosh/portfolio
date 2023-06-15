@@ -11,7 +11,7 @@ const connectLiveReload = require("connect-livereload");
 const indexRouter = require("./routes/index");
 const satelliteRouter = require("./routes/satellite");
 const datavisRouter = require("./routes/datavis");
-const taskRouter = require("./routes/interviewTasks");
+const eulerRouter = require("./routes/eulerTasks");
 
 // ReloadServer script for reloading page
 const liveReloadServer = livereload.createServer();
@@ -39,7 +39,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/", indexRouter);
 app.use("/satellite", satelliteRouter);
 app.use("/datavis", datavisRouter);
-app.use("/tasks", taskRouter);
+app.use("/eulerTasks", eulerRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

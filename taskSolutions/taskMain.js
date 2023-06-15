@@ -298,7 +298,7 @@ const task6 = (firstP, secondP, lMax, rMax) => {
   for (let i = 0; i < Number.MAX_SAFE_INTEGER; i++) {
     n = i;
     //break the loop if the second point already exits the ellipse
-    if (Math.abs(secondP.x) <= 0.01 && secondP.y > 0) {
+    if (secondP.x >= lMax && secondP.x <= rMax && secondP.y > 0) {
       break;
     }
 
