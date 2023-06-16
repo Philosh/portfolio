@@ -42,7 +42,7 @@ router.get("/:taskId", function (req, res, next) {
     6: 114,
   };
 
-  const taskDefParams = {
+  let taskDefParams = {
     1: [2, 100],
     2: [10000],
     3: [100],
@@ -54,32 +54,39 @@ router.get("/:taskId", function (req, res, next) {
   const taskFunc = taskIdFunc[taskID];
   const defParams = taskDefParams[taskID];
   let finalInput = queryInput ? queryInput : defParams;
-  if (taskID == 6) {
+
+  if (taskID == 6 && queryInput) {
     finalInput = [
       { x: finalInput[0], y: finalInput[1] },
       { x: finalInput[2], y: finalInput[3] },
       finalInput[4],
       finalInput[5],
     ];
+  } else if (taskID == 6) {
+    finalInput = [finalInput[0], finalInput[1], finalInput[2], finalInput[3]];
   }
+
+  taskDefParams[taskID] = finalInput;
+
+  console.log("finalInput", finalInput);
   const taskParamTxt = {
-    1: " a, b = " + finalInput.join(", "),
-    3: " n = " + finalInput.join(", "),
-    4: " n = " + finalInput.join(", "),
-    5: " n = " + finalInput.join(", "),
+    1: " where (a, b) = (" + taskDefParams[1].join(", ") + ")",
+    3: " where n = " + taskDefParams[3].join(", "),
+    4: " where n = " + taskDefParams[4].join(", "),
+    5: " where n = " + taskDefParams[5].join(", "),
     6:
-      " (x1, y1) = (" +
-      finalInput[0].x +
+      " where (x1, y1) = (" +
+      taskDefParams[6][0].x +
       ", " +
-      finalInput[0].y +
-      "), (x2, y2) = " +
-      finalInput[1].x +
+      taskDefParams[6][0].y +
+      "), (x2, y2) = (" +
+      taskDefParams[6][1].x +
       ", " +
-      finalInput[1].y +
+      taskDefParams[6][1].y +
       ") and exit threshold (lx, rx) = (" +
-      finalInput[2] +
+      taskDefParams[6][2] +
       ", " +
-      finalInput[3] +
+      taskDefParams[6][3] +
       ")",
   };
 
@@ -90,6 +97,7 @@ router.get("/:taskId", function (req, res, next) {
     ans: answer,
     taskId: taskID,
     pageTitle: "Task " + taskMap[taskID],
+    paramTxt: taskParamTxt[taskID],
   });
 });
 
