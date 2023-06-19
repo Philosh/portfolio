@@ -48,11 +48,8 @@
       (isValidData && isNumber && isPositive) ||
       (taskNo == "6" && isValidData && isNumber)
     ) {
-      console.log("taskNo", taskNo);
       const newUrl =
         "/eulerTasks/" + taskNo + "?input=[" + [...paramsVal] + "]";
-      console.log("url", newUrl);
-      console.log("paramElems", paramsVal);
       window.location.href = newUrl;
     } else {
       alert("Please enter Valid Positive Numbers");

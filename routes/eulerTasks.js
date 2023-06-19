@@ -18,7 +18,6 @@ router.get("/:taskId", function (req, res, next) {
   }
 
   const taskID = req.params.taskId;
-  console.log("taskId", taskID);
   const isWholeNum = dataV.validateIsWholeNum([taskID]);
   const isInRange = dataV.validateThreshold([taskID], 1, 6);
   if (!isWholeNum || !isInRange) {
@@ -68,7 +67,6 @@ router.get("/:taskId", function (req, res, next) {
 
   taskDefParams[taskID] = finalInput;
 
-  console.log("finalInput", finalInput);
   const taskParamTxt = {
     1: " where (a, b) = (" + taskDefParams[1].join(", ") + ")",
     3: " where n = " + taskDefParams[3].join(", "),
@@ -90,9 +88,7 @@ router.get("/:taskId", function (req, res, next) {
       ")",
   };
 
-  console.log("taskParamTxt", taskParamTxt);
   const answer = queryInput ? taskFunc(...finalInput) : taskFunc(...defParams);
-  console.log("answer", answer);
   res.render("tasksViews/tasksMain", {
     ans: answer,
     taskId: taskID,

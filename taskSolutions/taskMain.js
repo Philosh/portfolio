@@ -296,7 +296,6 @@ const task6 = (firstP, secondP, lMax, rMax) => {
 
   //Loop for a very high number
   for (let i = 0; i < Number.MAX_SAFE_INTEGER; i++) {
-    console.log("Looping");
     n = i;
     //break the loop if the second point already exits the ellipse
     if (secondP.x >= lMax && secondP.x <= rMax && secondP.y > 0) {
