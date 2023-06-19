@@ -36,11 +36,18 @@ main.main-wrapper
         when "4" : include tasksDesc/task4.pug
         when "5" : include tasksDesc/task5.pug
         when "6" : include tasksDesc/task6.pug
-        when "7" : include tasksDesc/task7.pug
       
-      if (taskId && taskId!=7)
-        | The solution to the problem is #{ans}
+      if (taskId)
+        | The solution to the problem #{paramTxt} is #{ans}
+        br
+        br
       // Invoice Wrapper End
+      case taskId
+        when "1" : include tasksDesc/inputlabel1.pug
+        when "3" : include tasksDesc/inputlabel2.pug
+        when "4" : include tasksDesc/inputlabel2.pug
+        when "5" : include tasksDesc/inputlabel2.pug
+        when "6" : include tasksDesc/inputlabel3.pug
     // end container
   // ========== section end ==========
 // ======== main-wrapper end ===========

@@ -31,4 +31,28 @@
     overlay.classList.remove("active");
     mainWrapper.classList.remove("active");
   });
+
+  const getTaskNo = () =>
+    window.location.href.split("eulerTasks/")[1].charAt(0);
+
+  document.getElementById("submit-btn").onclick = () => {
+    const paramsHTML = document.getElementsByTagName("input");
+
+    const paramsVal = [...paramsHTML].map((e) => e.value);
+
+    const isValidData = paramsVal.every((input) => input);
+    const isNumber = paramsVal.every((input) => !isNaN(input));
+    const isPositive = paramsVal.every((input) => parseFloat(input) >= 1);
+    const taskNo = getTaskNo();
+    if (
+      (isValidData && isNumber && isPositive) ||
+      (taskNo == "6" && isValidData && isNumber)
+    ) {
+      const newUrl =
+        "/eulerTasks/" + taskNo + "?input=[" + [...paramsVal] + "]";
+      window.location.href = newUrl;
+    } else {
+      alert("Please enter Valid Positive Numbers");
+    }
+  };
 })();
