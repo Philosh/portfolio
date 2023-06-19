@@ -39,7 +39,11 @@ main.main-wrapper
       
       if (taskId)
         | The solution to the problem #{paramTxt} is #{ans}
+        br
+        br
       // Invoice Wrapper End
+      case taskId
+        when "1" : include tasksDesc/inputlabel1.pug
     // end container
   // ========== section end ==========
 // ======== main-wrapper end ===========
