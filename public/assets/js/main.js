@@ -32,6 +32,9 @@
     mainWrapper.classList.remove("active");
   });
 
+  const getTaskNo = () =>
+    window.location.href.split("eulerTasks/")[1].charAt(0);
+
   document.getElementById("submit-btn").onclick = () => {
     const paramsHTML = document.getElementsByTagName("input");
 
@@ -40,10 +43,14 @@
     const isValidData = paramsVal.every((input) => input);
     const isNumber = paramsVal.every((input) => !isNaN(input));
     const isPositive = paramsVal.every((input) => parseFloat(input) >= 1);
-
-    if (isValidData && isNumber && isPositive) {
-      console.log("isvalid", isValidData, " isNumber ", isNumber);
-      const newUrl = "/eulerTasks/1?input=[" + [...paramsVal] + "]";
+    const taskNo = getTaskNo();
+    if (
+      (isValidData && isNumber && isPositive) ||
+      (taskNo == "6" && isValidData && isNumber)
+    ) {
+      console.log("taskNo", taskNo);
+      const newUrl =
+        "/eulerTasks/" + taskNo + "?input=[" + [...paramsVal] + "]";
       console.log("url", newUrl);
       console.log("paramElems", paramsVal);
       window.location.href = newUrl;
