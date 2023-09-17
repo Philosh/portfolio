@@ -4,7 +4,7 @@ const path = require("path");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  res.sendFile(path.join(__dirname + "/../public/MyResume/index.html"));
+  res.redirect("/resume");
 });
 
 module.exports = router;
