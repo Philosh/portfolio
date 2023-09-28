@@ -1,8 +1,31 @@
-# portfolio
-A codebase to the portfolio exhibiting various projects
+# Welcome to my Portfolio
 
-This project is quite simple, it runs in a node environment. To run this project you need to have installed Node. You can install node from this link https://nodejs.org/en/download.
+This project-repo simply introduces myself, my skill sets and technological competencies. To get the project up and running, clone the repository, checkout to the repository directory and run
 
-After installing node run `npm install` to install the packages and `npm run watch` to run the application in dev environment.
+```sh
+npm install
+npm run watch
+```
 
-Navigate to the url `127.0.0.1:3000/tasks` to see the solution of the interview tasks and `127.0.0.1:3000/satellite` to interact with a satellite visualtion tool.
+The project will then be running in the url:
+
+```sh
+127.0.0.1:3000
+```
+
+[Data Analysis] [solution] is available in
+
+```sh
+127.0.0.1:3000/tasks
+```
+
+and [Satellite Visualisation] is available in
+
+```sh
+127.0.0.1:3000/satellite
+```
+
+[//]: # "Link References"
+[Data Analysis]: https://github.com/Philosh/portfolio/tree/master/taskSolutions
+[solution]: https://github.com/Philosh/portfolio/blob/master/taskSolutions/taskMain.js
+[Satellite Visualisation]: https://github.com/Philosh/portfolio/tree/master/public/javascripts/satvis
