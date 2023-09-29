@@ -37,10 +37,11 @@ and [Satellite Visualisation] is available in
 src="https://github.com/Philosh/portfolio/blob/master/public/resume/assets/img/portfolio/portfolio1-details-1.jpg?raw=true" alt="drawing" width="50%"/>
 </p>
 
-Another project (A simple React - Single Page Application) is available in [IONA-APP]
+Another project (A simple React - Single Page Application) is available in [IONA-APP]. And the demo link [here].(Might take a minute or so to load the first time).
 
 [//]: # "Link References"
 [Data Analysis]: https://github.com/Philosh/portfolio/tree/master/taskSolutions
 [solution]: https://github.com/Philosh/portfolio/blob/master/taskSolutions/taskMain.js
 [Satellite Visualisation]: https://github.com/Philosh/portfolio/tree/master/public/javascripts/satvis
 [IONA-APP]: https://github.com/Philosh/IONA-APP
+[here]: https://iona-app.fly.dev/
