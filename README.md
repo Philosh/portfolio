@@ -30,6 +30,7 @@ and [Satellite Visualisation] is available in
 ```sh
 127.0.0.1:3000/satellite
 ```
+<<<<<<< HEAD
 
 <p align="center">
 <img class="img-fluid" src="https://github.com/Philosh/portfolio/blob/master/public/resume/assets/img/portfolio/portfolio1-details-3.jpg?raw=true" alt="drawing" width="50%"/>
@@ -39,6 +40,10 @@ src="https://github.com/Philosh/portfolio/blob/master/public/resume/assets/img/p
 
 Another project (A simple React - Single Page Application) is available in IONA-APP
 
+=======
+<img src="https://github.com/Philosh/portfolio/blob/master/public/resume/assets/img/portfolio/portfolio1-details-1.jpg?raw=true" alt="drawing" width="500"/>
+<img src="https://github.com/Philosh/portfolio/blob/master/public/resume/assets/img/portfolio/portfolio1-details-3.jpg?raw=true" alt="drawing" width="500"/>
+>>>>>>> 898f059956296e3ba7beb62701692679fa3f13be
 [//]: # "Link References"
 [Data Analysis]: https://github.com/Philosh/portfolio/tree/master/taskSolutions
 [solution]: https://github.com/Philosh/portfolio/blob/master/taskSolutions/taskMain.js
