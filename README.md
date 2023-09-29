@@ -37,7 +37,7 @@ and [Satellite Visualisation] is available in
 src="https://github.com/Philosh/portfolio/blob/master/public/resume/assets/img/portfolio/portfolio1-details-1.jpg?raw=true" alt="drawing" width="50%"/>
 </p>
 
-Another project (A simple React - Single Page Application) is available in IONA-APP
+Another project (A simple React - Single Page Application) is available in [IONA-APP]
 
 [//]: # "Link References"
 [Data Analysis]: https://github.com/Philosh/portfolio/tree/master/taskSolutions
