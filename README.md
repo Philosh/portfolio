@@ -31,13 +31,13 @@ and [Satellite Visualisation] is available in
 127.0.0.1:3000/satellite
 ```
 
+Another project (A simple React - Single Page Application) is available in [IONA-APP]. And the demo link [here].(Might take a minute or so to load the first time).
+
 <p  align="center">
 <img class="img-fluid"  src="https://github.com/Philosh/IONA-APP/blob/master/public/assets/images/image1.jpg?raw=true"  alt="drawing"  width="50%"/>
 <img  class="img-fluid"
 src="https://github.com/Philosh/IONA-APP/blob/master/public/assets/images/image2.jpg?raw=true"  alt="drawing"  width="50%"/>
 </p>
-
-Another project (A simple React - Single Page Application) is available in [IONA-APP]. And the demo link [here].(Might take a minute or so to load the first time).
 
 [//]: # "Link References"
 [Data Analysis]: https://github.com/Philosh/portfolio/tree/master/taskSolutions
