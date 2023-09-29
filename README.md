@@ -25,6 +25,9 @@ and [Satellite Visualisation] is available in
 127.0.0.1:3000/satellite
 ```
 
+![alt text](https://github.com/Philosh/portfolio/blob/master/public/resume/assets/img/portfolio/portfolio1-details-1.jpg?raw=true)
+
+
 [//]: # "Link References"
 [Data Analysis]: https://github.com/Philosh/portfolio/tree/master/taskSolutions
 [solution]: https://github.com/Philosh/portfolio/blob/master/taskSolutions/taskMain.js
