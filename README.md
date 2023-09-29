@@ -19,18 +19,28 @@ The project will then be running in the url:
 127.0.0.1:3000/tasks
 ```
 
+<p align="center">
+<img class="img-fluid" src="https://github.com/Philosh/portfolio/blob/master/public/resume/assets/img/portfolio/portfolio4-details-3.jpg?raw=true" alt="drawing" width="50%"/>
+<img class="img-fluid"
+src="https://github.com/Philosh/portfolio/blob/master/public/resume/assets/img/portfolio/portfolio4-details-4.jpg?raw=true" alt="drawing" width="50%"/>
+</p>
+
 and [Satellite Visualisation] is available in
 
 ```sh
 127.0.0.1:3000/satellite
 ```
-<img src="https://github.com/Philosh/portfolio/blob/master/public/resume/assets/img/portfolio/portfolio1-details-1.jpg?raw=true" alt="drawing" width="200"/>
 
-https://github.com/Philosh/portfolio/blob/master/public/resume/assets/img/portfolio/portfolio1-details-1.jpg?raw=true
-![alt text](https://github.com/Philosh/portfolio/blob/master/public/resume/assets/img/portfolio/portfolio1-details-1.jpg?raw=true)
+<p align="center">
+<img class="img-fluid" src="https://github.com/Philosh/portfolio/blob/master/public/resume/assets/img/portfolio/portfolio1-details-3.jpg?raw=true" alt="drawing" width="50%"/>
+<img class="img-fluid"
+src="https://github.com/Philosh/portfolio/blob/master/public/resume/assets/img/portfolio/portfolio1-details-1.jpg?raw=true" alt="drawing" width="50%"/>
+</p>
 
+Another project (A simple React - Single Page Application) is available in IONA-APP
 
 [//]: # "Link References"
 [Data Analysis]: https://github.com/Philosh/portfolio/tree/master/taskSolutions
 [solution]: https://github.com/Philosh/portfolio/blob/master/taskSolutions/taskMain.js
 [Satellite Visualisation]: https://github.com/Philosh/portfolio/tree/master/public/javascripts/satvis
+[IONA-APP]: https://github.com/Philosh/IONA-APP
